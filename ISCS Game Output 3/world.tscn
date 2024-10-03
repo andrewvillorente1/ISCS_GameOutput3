@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://c7kdwbphhnekm"]
+[gd_scene load_steps=6 format=3 uid="uid://c7kdwbphhnekm"]
 
 [ext_resource type="PackedScene" uid="uid://c7va8utq0sdtj" path="res://player.tscn" id="1_8kkab"]
 [ext_resource type="Texture2D" uid="uid://cj7rxljgpesul" path="res://Assets/Mini Pixel Pack 3/Mini Pixel Pack 3/Space_BG (2 frames) (64 x 64).png" id="2_e6ixj"]
+[ext_resource type="PackedScene" uid="uid://04sg0qu1r52x" path="res://asteroid.tscn" id="3_tsfah"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_lphby"]
 texture = ExtResource("2_e6ixj")
@@ -121,3 +122,9 @@ zoom = Vector2(3.1, 3.1)
 
 [node name="Player" parent="." instance=ExtResource("1_8kkab")]
 position = Vector2(0, -42)
+
+[node name="asteroid" parent="." instance=ExtResource("3_tsfah")]
+position = Vector2(-144, 47)
+
+[node name="asteroid2" parent="." instance=ExtResource("3_tsfah")]
+position = Vector2(-131, -93)

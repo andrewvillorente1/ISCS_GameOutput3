@@ -7,6 +7,7 @@ const FRICTION = 100.0
 const ROTATION_SPEED = 20.0
 
 @onready var sprite = $AnimatedSprite2D
+var bullet_scene = preload("res://bullet.tscn")
 
 func _physics_process(delta):
 	var input_direction = Vector2(
@@ -25,3 +26,14 @@ func _physics_process(delta):
 		sprite.play("idle")
 
 	move_and_slide()
+	
+	if Input.is_action_just_pressed("ui_accept"):
+		_spawn_bullet()
+
+func _spawn_bullet():
+	var bullet = bullet_scene.instantiate()
+	var offset = Vector2(0, -8).rotated(sprite.rotation) 
+	bullet.name = "Bullet"
+	bullet.position = position + offset 
+	bullet.rotation = sprite.rotation - deg_to_rad(90)
+	get_parent().add_child(bullet)
