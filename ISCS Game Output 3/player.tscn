@@ -33,12 +33,12 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_shtci"]
 size = Vector2(12, 12.5)
 
-[node name="Player" type="CharacterBody2D"]
+[node name="Player" type="CharacterBody2D" groups=["Player"]]
 script = ExtResource("1_ske0u")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." groups=["Player"]]
 sprite_frames = SubResource("SpriteFrames_l7euw")
-animation = &"move"
+animation = &"idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 1)

@@ -1,6 +1,7 @@
 extends Area2D
 
 const SPEED = 200.0
+
 @onready var sprite = $BulletSprite
 
 func _physics_process(delta):
