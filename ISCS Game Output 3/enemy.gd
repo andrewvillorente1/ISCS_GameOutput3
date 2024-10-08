@@ -26,6 +26,7 @@ func _physics_process(delta):
 	
 	if player:
 		movement = position.direction_to(player.position) * SPEED
+		movement.y = SPEED # lock vertical movement to move down
 	movement = move_and_collide(movement)
 
 func _on_bullet_fire_rate_timeout() -> void:
