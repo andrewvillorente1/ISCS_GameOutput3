@@ -46,7 +46,6 @@ script = ExtResource("1_jebgf")
 [node name="AsteroidSprite" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_a4j77")
 animation = &"asteroid_explode"
-frame_progress = 0.189201
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-1, -1)

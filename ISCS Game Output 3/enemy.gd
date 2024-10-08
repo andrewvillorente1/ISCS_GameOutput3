@@ -1,20 +1,25 @@
 extends CharacterBody2D
 
-const SPEED = 1.0
+const SPEED = 0.8
 
+var health = 3
 var player = null
 var canShoot = true
+var BulletEnemy= preload("res://bullet_enemy.tscn")
 
 @onready var sprite = $AnimatedSprite2D
 @onready var bulletSpawnPosition = $BulletSpawnPosition
-var BulletEnemy= preload("res://bullet_enemy.tscn")
+#@onready var collision_shape = $CollisionShape2D
+
 
 func _ready():
 	sprite.play("move")
+	#collision_shape.disabled = true
 
 func _on_detection_range_body_entered(body: Node2D) -> void:
 	if body.is_in_group("Player"):
 		player = body
+		#collision_shape.disabled = false
 
 func _physics_process(delta):
 	var movement = Vector2(0, SPEED)
@@ -36,3 +41,10 @@ func shoot():
 		
 		$BulletFireRate.start()
 		canShoot = false
+
+func enemy_hit():
+	health -= 1
+	if health == 0:
+		sprite.play("explode")
+		await get_tree().create_timer(0.25).timeout
+		queue_free()
