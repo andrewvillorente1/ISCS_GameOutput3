@@ -11,6 +11,9 @@ func _physics_process(delta):
 		position += Vector2(SPEED * delta, 0).rotated(rotation)
 		sprite.play("normal")
 
+func _on_despawn_timer_timeout() -> void:
+	queue_free()
+
 func _on_body_entered(body):
 	if body.is_in_group("static_triggers") and not has_exploded:
 		trigger_explosion()
@@ -33,4 +36,3 @@ func trigger_explosion():
 	sprite.play("explode")
 	await sprite.frame_changed
 	queue_free()
-		
