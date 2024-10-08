@@ -6,7 +6,7 @@ const DECELERATION = 200.0
 const FRICTION = 100.0
 const ROTATION_SPEED = 20.0
 
-var health = 10
+#var health = 10 # player health is now a Global variable
 var bullet_scene = preload("res://bullet.tscn")
 
 @onready var sprite = $AnimatedSprite2D
@@ -41,6 +41,6 @@ func _spawn_bullet():
 	get_parent().add_child(bullet)
 
 func player_hit():
-	health -= 1
-	if health == 0:
+	Global.playerHealth -= 1
+	if Global.playerHealth == 0:
 		queue_free()

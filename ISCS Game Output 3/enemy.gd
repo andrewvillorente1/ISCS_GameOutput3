@@ -45,6 +45,7 @@ func shoot():
 func enemy_hit():
 	health -= 1
 	if health == 0:
+		Global.score += 100 * Global.playerHealth
 		sprite.play("explode")
 		await get_tree().create_timer(0.25).timeout
 		queue_free()

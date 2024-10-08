@@ -1,10 +1,12 @@
-[gd_scene load_steps=8 format=3 uid="uid://c7kdwbphhnekm"]
+[gd_scene load_steps=10 format=3 uid="uid://c7kdwbphhnekm"]
 
 [ext_resource type="PackedScene" uid="uid://c7va8utq0sdtj" path="res://player.tscn" id="1_8kkab"]
 [ext_resource type="Script" path="res://world.gd" id="1_i5qfh"]
 [ext_resource type="Texture2D" uid="uid://cj7rxljgpesul" path="res://Assets/Mini Pixel Pack 3/Mini Pixel Pack 3/Space_BG (2 frames) (64 x 64).png" id="2_e6ixj"]
 [ext_resource type="PackedScene" uid="uid://04sg0qu1r52x" path="res://asteroid.tscn" id="3_tsfah"]
 [ext_resource type="PackedScene" uid="uid://db6q22rqqpgmi" path="res://enemy.tscn" id="4_go82x"]
+[ext_resource type="Script" path="res://hp_value.gd" id="6_6jn8p"]
+[ext_resource type="Script" path="res://score_value.gd" id="7_v70lv"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_lphby"]
 texture = ExtResource("2_e6ixj")
@@ -49,6 +51,9 @@ sources/0 = SubResource("TileSetAtlasSource_lphby")
 [node name="Game" type="Node2D"]
 script = ExtResource("1_i5qfh")
 
+[node name="SpawnTimer" type="Timer" parent="."]
+autostart = true
+
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = SubResource("TileSet_rjstn")
 format = 2
@@ -59,19 +64,65 @@ position = Vector2(7.9, -40)
 scale = Vector2(3, 3)
 zoom = Vector2(3.1, 3.1)
 
-[node name="asteroid" parent="." instance=ExtResource("3_tsfah")]
-position = Vector2(-144, 47)
-
-[node name="asteroid2" parent="." instance=ExtResource("3_tsfah")]
-position = Vector2(-131, -93)
-
-[node name="Enemy" parent="." instance=ExtResource("4_go82x")]
-position = Vector2(-136, -152)
-
 [node name="Player" parent="." instance=ExtResource("1_8kkab")]
 position = Vector2(0, -42)
 
-[node name="SpawnTimer" type="Timer" parent="."]
-autostart = true
+[node name="Enemy" parent="." instance=ExtResource("4_go82x")]
+visible = false
+position = Vector2(-312, -112)
+
+[node name="asteroid" parent="." instance=ExtResource("3_tsfah")]
+visible = false
+position = Vector2(-240, 32)
+
+[node name="asteroid2" parent="." instance=ExtResource("3_tsfah")]
+visible = false
+position = Vector2(-240, 8)
+
+[node name="UI" type="Node2D" parent="."]
+z_index = 1
+
+[node name="Control" type="Control" parent="UI"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = -176.0
+offset_top = -144.0
+offset_right = 192.0
+offset_bottom = 64.0
+
+[node name="HP" type="Label" parent="UI/Control"]
+layout_mode = 0
+offset_left = 32.0
+offset_top = 8.0
+offset_right = 56.0
+offset_bottom = 31.0
+text = "HP"
+
+[node name="HPValue" type="Label" parent="UI/Control"]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 27.0
+offset_bottom = 31.0
+text = "10"
+script = ExtResource("6_6jn8p")
+
+[node name="Score" type="Label" parent="UI/Control"]
+layout_mode = 0
+offset_left = 240.0
+offset_top = 8.0
+offset_right = 288.0
+offset_bottom = 31.0
+text = "Score:"
+
+[node name="ScoreValue" type="Label" parent="UI/Control"]
+layout_mode = 0
+offset_left = 296.0
+offset_top = 8.0
+offset_right = 360.0
+offset_bottom = 31.0
+text = "0"
+horizontal_alignment = 2
+script = ExtResource("7_v70lv")
 
 [connection signal="timeout" from="SpawnTimer" to="." method="_on_spawn_timer_timeout"]
