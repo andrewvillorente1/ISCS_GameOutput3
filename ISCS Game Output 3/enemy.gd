@@ -21,6 +21,13 @@ func _on_detection_range_body_entered(body: Node2D) -> void:
 		player = body
 		#collision_shape.disabled = false
 
+func _on_area_2d_body_entered(body: Node2D) -> void:
+	if body.has_method("player_hit"):
+		health = 0
+		body.player_hit()
+		enemy_hit()
+		
+
 func _physics_process(delta):
 	var movement = Vector2(0, SPEED)
 	
@@ -45,7 +52,7 @@ func shoot():
 
 func enemy_hit():
 	health -= 1
-	if health == 0:
+	if health <= 0:
 		Global.score += 100 * Global.playerHealth
 		sprite.play("explode")
 		await get_tree().create_timer(0.25).timeout
