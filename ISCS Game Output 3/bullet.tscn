@@ -33,7 +33,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"explode",
-"speed": 5.0
+"speed": 10.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -55,6 +55,7 @@ script = ExtResource("1_b26qi")
 [node name="BulletSprite" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_x4hf0")
 animation = &"explode"
+frame_progress = 0.395462
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
 scale = Vector2(0.225, 0.225)

@@ -4,6 +4,9 @@
 [ext_resource type="Texture2D" uid="uid://4u1ix4a5nhdb" path="res://Assets/Spaceship Sprites by Lowich/ships/Gray1.png" id="2_i5t81"]
 [ext_resource type="Texture2D" uid="uid://be7knh1umx81i" path="res://Assets/Mini Pixel Pack 3/Mini Pixel Pack 3/Effects/Explosion (16 x 16).png" id="2_t1fgm"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ira24"]
+size = Vector2(16, 14)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_m5pmp"]
 atlas = ExtResource("2_t1fgm")
 region = Rect2(16, 0, 16, 16)
@@ -52,9 +55,6 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_ira24"]
-size = Vector2(16, 14)
-
 [sub_resource type="CircleShape2D" id="CircleShape2D_cjt18"]
 radius = 240.169
 
@@ -63,13 +63,20 @@ collision_layer = 2
 collision_mask = 2
 script = ExtResource("1_qduc0")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-rotation = -3.14159
-sprite_frames = SubResource("SpriteFrames_47vlg")
-animation = &"move"
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_ira24")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_ira24")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+rotation = -3.14159
+sprite_frames = SubResource("SpriteFrames_47vlg")
+animation = &"explode"
+frame = 3
+frame_progress = 1.0
 
 [node name="DetectionRange" type="Area2D" parent="."]
 
@@ -83,5 +90,6 @@ position = Vector2(0, 7)
 wait_time = 0.75
 autostart = true
 
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_entered" from="DetectionRange" to="." method="_on_detection_range_body_entered"]
 [connection signal="timeout" from="BulletFireRate" to="." method="_on_bullet_fire_rate_timeout"]

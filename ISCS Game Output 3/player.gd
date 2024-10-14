@@ -26,7 +26,7 @@ func _physics_process(delta):
 	else:
 		velocity = velocity.move_toward(Vector2.ZERO, DECELERATION * delta)
 		sprite.play("idle")
-
+	
 	move_and_slide()
 	
 	if(Global.playerHealth <= 0):
