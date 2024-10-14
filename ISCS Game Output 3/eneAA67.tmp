@@ -1,0 +1,52 @@
+[gd_scene load_steps=7 format=3 uid="uid://db6q22rqqpgmi"]
+
+[ext_resource type="Script" path="res://enemy.gd" id="1_qduc0"]
+[ext_resource type="Texture2D" uid="uid://4u1ix4a5nhdb" path="res://Assets/Spaceship Sprites by Lowich/ships/Gray1.png" id="2_i5t81"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t5wl2"]
+atlas = ExtResource("2_i5t81")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_47vlg"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t5wl2")
+}],
+"loop": true,
+"name": &"move",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ira24"]
+size = Vector2(16, 14)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_cjt18"]
+radius = 112.112
+
+[node name="Enemy" type="CharacterBody2D"]
+script = ExtResource("1_qduc0")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+rotation = -3.14159
+sprite_frames = SubResource("SpriteFrames_47vlg")
+animation = &"move"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_ira24")
+disabled = true
+
+[node name="DetectionRange" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionRange"]
+shape = SubResource("CircleShape2D_cjt18")
+
+[node name="BulletSpawnPosition" type="Marker2D" parent="."]
+position = Vector2(0, 7)
+
+[node name="BulletFireRate" type="Timer" parent="."]
+wait_time = 0.75
+autostart = true
+
+[connection signal="body_entered" from="DetectionRange" to="." method="_on_detection_range_body_entered"]
+[connection signal="timeout" from="BulletFireRate" to="." method="_on_bullet_fire_rate_timeout"]

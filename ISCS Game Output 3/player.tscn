@@ -1,7 +1,24 @@
-[gd_scene load_steps=7 format=3 uid="uid://c7va8utq0sdtj"]
+[gd_scene load_steps=12 format=3 uid="uid://c7va8utq0sdtj"]
 
 [ext_resource type="Texture2D" uid="uid://bll4iw8j2equ6" path="res://Assets/Mini Pixel Pack 3/Mini Pixel Pack 3/Player ship/Player_ship (16 x 16).png" id="1_gq5nf"]
 [ext_resource type="Script" path="res://player.gd" id="1_ske0u"]
+[ext_resource type="Texture2D" uid="uid://be7knh1umx81i" path="res://Assets/Mini Pixel Pack 3/Mini Pixel Pack 3/Effects/Explosion (16 x 16).png" id="2_cmay0"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b55b4"]
+atlas = ExtResource("2_cmay0")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q2s45"]
+atlas = ExtResource("2_cmay0")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y7ovw"]
+atlas = ExtResource("2_cmay0")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d1fuq"]
+atlas = ExtResource("2_cmay0")
+region = Rect2(64, 0, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_spynb"]
 atlas = ExtResource("1_gq5nf")
@@ -13,6 +30,23 @@ region = Rect2(16, 0, 16, 16)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_l7euw"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b55b4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_q2s45")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y7ovw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d1fuq")
+}],
+"loop": true,
+"name": &"explode",
+"speed": 5.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_spynb")
@@ -30,16 +64,18 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_shtci"]
-size = Vector2(12, 12.5)
+[sub_resource type="CircleShape2D" id="CircleShape2D_dnrd6"]
+radius = 8.0
 
-[node name="Player" type="CharacterBody2D"]
+[node name="Player" type="CharacterBody2D" groups=["Player"]]
+collision_layer = 3
+collision_mask = 3
 script = ExtResource("1_ske0u")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." groups=["Player"]]
 sprite_frames = SubResource("SpriteFrames_l7euw")
-animation = &"move"
+animation = &"idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 1)
-shape = SubResource("RectangleShape2D_shtci")
+shape = SubResource("CircleShape2D_dnrd6")
