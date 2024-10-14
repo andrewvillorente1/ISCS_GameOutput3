@@ -29,10 +29,10 @@ func _on_body_entered(body):
 	if body.has_method("enemy_hit"):
 		body.enemy_hit()
 		trigger_explosion()
-		queue_free()
+		#queue_free()
 
 func trigger_explosion():
 	has_exploded = true
 	sprite.play("explode")
-	await sprite.frame_changed
+	await get_tree().create_timer(0.3).timeout
 	queue_free()

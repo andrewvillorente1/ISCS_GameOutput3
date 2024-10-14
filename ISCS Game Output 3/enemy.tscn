@@ -74,7 +74,9 @@ shape = SubResource("RectangleShape2D_ira24")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 rotation = -3.14159
 sprite_frames = SubResource("SpriteFrames_47vlg")
-animation = &"move"
+animation = &"explode"
+frame = 3
+frame_progress = 1.0
 
 [node name="DetectionRange" type="Area2D" parent="."]
 
