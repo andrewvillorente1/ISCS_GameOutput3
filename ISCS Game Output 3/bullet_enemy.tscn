@@ -1,7 +1,20 @@
-[gd_scene load_steps=6 format=3 uid="uid://b656jmn3lvik6"]
+[gd_scene load_steps=10 format=3 uid="uid://b656jmn3lvik6"]
 
 [ext_resource type="Script" path="res://bullet_enemy.gd" id="1_thtsm"]
+[ext_resource type="Texture2D" uid="uid://r0gu2ws4ilsy" path="res://Assets/Mini Pixel Pack 3/Mini Pixel Pack 3/Projectiles/Enemy_projectile (16 x 16).png" id="2_8t1mu"]
 [ext_resource type="Texture2D" uid="uid://b6n0hgvo6qjap" path="res://Assets/Spaceship Sprites by Lowich/stitchedFiles/projectiles_6x6.png" id="2_478d2"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ua5d1"]
+atlas = ExtResource("2_8t1mu")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lyxog"]
+atlas = ExtResource("2_8t1mu")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ealm8"]
+atlas = ExtResource("2_8t1mu")
+region = Rect2(48, 0, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_lns7v"]
 atlas = ExtResource("2_478d2")
@@ -11,11 +24,25 @@ region = Rect2(6, 0, 6, 6)
 animations = [{
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_ua5d1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lyxog")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ealm8")
+}],
+"loop": true,
+"name": &"explode",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_lns7v")
 }],
 "loop": true,
 "name": &"normal",
-"speed": 5.0
+"speed": 10.0
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ykkx3"]
@@ -28,6 +55,7 @@ script = ExtResource("1_thtsm")
 rotation = 3.14159
 sprite_frames = SubResource("SpriteFrames_o6idd")
 animation = &"normal"
+autoplay = "normal"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 1)

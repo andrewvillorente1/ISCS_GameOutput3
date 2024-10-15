@@ -1,14 +1,13 @@
 extends Area2D
 
-const SPEED = 200.0
-
+var speed = 200.0
 var has_exploded = false
 
 @onready var sprite = $BulletSprite
 
 func _physics_process(delta):
 	if not has_exploded:
-		position += Vector2(SPEED * delta, 0).rotated(rotation)
+		position += Vector2(speed * delta, 0).rotated(rotation)
 		sprite.play("normal")
 
 func _on_despawn_timer_timeout() -> void:
@@ -16,6 +15,7 @@ func _on_despawn_timer_timeout() -> void:
 
 func _on_body_entered(body):
 	if body.is_in_group("static_triggers") and not has_exploded:
+		speed = 20
 		trigger_explosion()
 		body.trigger_explosion()
 		
